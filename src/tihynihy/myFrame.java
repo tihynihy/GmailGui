@@ -1,5 +1,7 @@
 package tihynihy;
 
+import dataBase.userData;
+
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
@@ -13,52 +15,55 @@ public class myFrame extends JFrame implements ActionListener, MouseListener {
     JPanel mainPanel;
     JTextField userField;
     JPasswordField passwordField;
-    JButton logButton;
     Border blackBorder;
-    ImageIcon gmailIcon = new ImageIcon("gmailLogo.png");
     JLabel logoLabel;
-    JLabel hintLabel;
+
+    JButton hintButton;
+    JButton logButton;
+
+    ImageIcon gmailIcon = new ImageIcon("gmailLogo.png");
+    userData data = new userData();
 
     myFrame(){
 
-
-        hintLabel = new JLabel();
-        hintLabel.setBounds(200,320,100,100);
-        hintLabel.setText("Not signed in?");
-        hintLabel.setLayout(null);
-
-
-
-        blackBorder = BorderFactory.createLineBorder(Color.BLACK,2);
         logoLabel = new JLabel();
         logoLabel.setLayout(null);
         logoLabel.setBounds(175,0,200,200);
         logoLabel.setIcon(gmailIcon);
-
-
-        logButton = new JButton();
-        logButton.setBounds(200,300,80,40);
-        logButton.setText("LOG IN");
-        logButton.setFocusable(false);
-        logButton.setBackground(new Color(220, 7, 7));
-        logButton.setForeground(Color.WHITE);
-        logButton.setBorder(blackBorder);
-        logButton.addActionListener(this);
-        logButton.addMouseListener(this);
+        blackBorder = BorderFactory.createLineBorder(Color.BLACK,2);
 
 
         userField = new JTextField();
-        userField.setBounds(200,200,150,20);
+        userField.setBounds(200,200,150,30);
         userField.setText("Email");
         userField.setBorder(blackBorder);
 
 
 
         passwordField = new JPasswordField();
-        passwordField.setBounds(200,240,150,20);
-        passwordField.setText("Password");
+        passwordField.setBounds(200,240,150,30);
         passwordField.setBorder(blackBorder);
 
+        logButton = new JButton();
+        logButton.setBounds(200,300,80,40);
+        logButton.setText("LOG IN");
+        logButton.setFocusable(false);
+        logButton.setBackground(new Color(220, 7, 7));
+        logButton.setForeground(Color.BLACK);
+        logButton.setBorder(blackBorder);
+        logButton.addActionListener(this);
+        logButton.addMouseListener(this);
+
+
+        hintButton = new JButton("REGISTRATION");
+        hintButton.setBounds(200,350,150,30);
+        hintButton.setLayout(null);
+        hintButton.addActionListener(this);
+        hintButton.addMouseListener(this);
+        hintButton.setForeground(Color.black);
+        hintButton.setFocusable(false);
+        hintButton.setBackground(new Color(220, 7, 7));
+        hintButton.setBorder(blackBorder);
 
 
         mainPanel = new JPanel();
@@ -68,9 +73,8 @@ public class myFrame extends JFrame implements ActionListener, MouseListener {
         mainPanel.add(passwordField);
         mainPanel.add(logButton);
         mainPanel.add(logoLabel);
-        mainPanel.add(hintLabel);
-
-
+        mainPanel.add(hintButton);
+        mainPanel.setBackground(new Color(245, 197, 197, 255));
 
 
         this.setTitle("Gmail - Login");
@@ -88,7 +92,35 @@ public class myFrame extends JFrame implements ActionListener, MouseListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+       if(userField.getText().equals(data.getUserName1()) && e.getSource()==logButton){
 
+           this.dispose();
+           new homePageFrame();
+
+       } else if(userField.getText().equals(data.getUserName2()) && e.getSource()==logButton){
+
+           this.dispose();
+           new homePageFrame();
+
+       } else if(userField.getText().equals(data.getUserName3()) && e.getSource()==logButton){
+
+           this.dispose();
+           new homePageFrame();
+
+       } else if(userField.getText().equals(data.getUserName4()) && e.getSource()==logButton){
+
+           this.dispose();
+           new homePageFrame();
+
+       } else if(userField.getText().equals(data.getUserName5()) && e.getSource()==logButton){
+
+           this.dispose();
+           new homePageFrame();
+
+       } else if(e.getSource()==hintButton){
+           this.dispose();
+           new createAccountFrame();
+       }
     }
 
     @Override
@@ -108,12 +140,24 @@ public class myFrame extends JFrame implements ActionListener, MouseListener {
 
     @Override
     public void mouseEntered(MouseEvent e) {
-        logButton.setBackground(new Color(255, 126, 126, 174));
-        logButton.setForeground(new Color(7, 5, 5));
+       if(e.getSource()==logButton){
+           logButton.setBackground(new Color(255, 0, 0, 255));
+           logButton.setForeground(new Color(7, 5, 5));
+       } else if(e.getSource()==hintButton){
+           hintButton.setBackground(new Color(255, 0, 0, 255));
+           hintButton.setForeground(new Color(7, 5, 5));
+
+       }
+
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-        logButton.setBackground(new Color(220, 7, 7));
+        if(e.getSource()==logButton){
+            logButton.setBackground(new Color(220, 7, 7));
+        } else if(e.getSource()==hintButton){
+            hintButton.setBackground(new Color(220, 7, 7));
+        }
+
     }
 }
